@@ -1,287 +1,443 @@
-import java.util.*;
-
-public class ticktaktoe 
+import java.util.Scanner;
+public class tiktaktoe
 {
-    Scanner in = new Scanner(System.in);
-
-    String[][] gameBoard = 
-    {
-        {"1","|","2","|","3"},
-        {"-","+","-","+","-"},
-        {"4","|","5","|","6"},
-        {"-","+","-","+","-"},
-        {"7","|","8","|","9"}
-    };
-
-    String userSign, botSign, userMove, botMove;
-    boolean win;
-
-    public ticktaktoe()
-    {
-        userSign = ""; botSign = ""; userMove = ""; botMove = ""; win = false;
-    }
-
-    // Prints Game Board
-    public void printGameboard()
+    public static void printGameboard(String gb[][])
     {
         int i, j;
-
-        System.out.println();
-        for(i = 0; i < gameBoard.length; i++)
+        for(i = 0; i < 5; i++)
         {
-            for(j = 0; j < gameBoard.length; j++)
+            for(j = 0; j < 5; j++)
+            {
+                System.out.print(gb[i][j]);
+            }
+            System.out.println();
+        }
+    }
+    public static void main(String[] args)
+    {
+        Scanner in = new Scanner(System.in);
+    
+        String signP = "", signC = "";
+        int choice = 0, flgP = 0, flgC = 0;
+    
+        String[][] gameBoard = 
+        {
+            {"1","|","2","|","3"},
+            {"-","+","-","+","-"},
+            {"4","|","5","|","6"},
+            {"-","+","-","+","-"},
+            {"7","|","8","|","9"}
+        };
+    
+        int i, j;
+        for(i = 0; i < 5; i++)
+        {
+            for(j = 0; j < 5; j++)
             {
                 System.out.print(gameBoard[i][j]);
             }
             System.out.println();
         }
+    
+        System.out.println("To selelct: \nEnter 1 for 'X' \nEnter 2 for 'O'");
+        choice = in.nextInt();
         System.out.println();
-    }
-
-    // Sets the Preference whether 'X' or 'O'
-    public void setPreference()
-    {
-        System.out.println("Enter Your Prefernce: 'x' or 'o'");
-        userSign = in.next().toUpperCase();
-
-        System.out.println();
-
-        botSign = (userSign.equals("X")) ? "O" : "X";
-
-        System.out.println("User : " + userSign + "\t" + "Bot : " + botSign);
-        System.out.println();
-    }
-
-    // Gets User Move
-    public void getUserMove()
-    {
-        System.out.println("Enter Your Move: ");
-        userMove = Integer.toString(in.nextInt());
-
-        // This code will check whether or not the position is empty or not
-        int i, j;
-
-        for(i = 0; i < gameBoard.length; i++)
+    
+        //   For Player
+        if(choice == 1)
         {
-            for(j = 0; j < gameBoard.length; j++)
+            signP = "X";
+        }
+        if(choice == 2)
+        {
+            signP = "O";
+        }
+    
+        //   For Computer
+        if(choice == 1)
+        {
+            signC = "O";
+        }
+        if(choice == 2)
+        {
+            signC = "X";
+        }
+        while(true)
+        {
+            while(flgP != 1)
             {
-                if(userMove.equals(gameBoard[i][j]) && gameBoard[i][j].equals(userSign) || gameBoard[i][j].equals(botSign))
+                //   Player's turn
+                if(flgP != 1)
                 {
-                    System.out.println("Try Again!");
-                    getUserMove();
-                }
-                else
-                {
-                    i = 7;  // This code will terminate the outer loop
-                    break;
+                    System.out.println("Your Turn!");
+                    choice = in.nextInt();
+    
+                    flgP = 1;
+                    switch(choice)
+                    {
+                        case 1: if(gameBoard[0][0] == signP || gameBoard[0][0] == signC)
+                                {    
+                                    System.out.println("Try Again!");
+                                    flgP = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[0][0] = signP;
+                                }
+                        break;
+                        case 2: if(gameBoard[0][2] == signP || gameBoard[0][2] == signC)
+                                {
+                                    System.out.println("Try Again!");
+                                    flgP = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[0][2] = signP;
+                                }
+                        break;
+                        case 3: if(gameBoard[0][4] == signP || gameBoard[0][4] == signC)
+                                    {
+                                        System.out.println("Try Again!");
+                                        flgP = 0;
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        gameBoard[0][4] = signP;
+                                    }
+                        break;
+                        case 4: if(gameBoard[2][0] == signP || gameBoard[2][0] == signC)
+                                {
+                                    System.out.println("Try Again!");
+                                    flgP = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[2][0] = signP;
+                                }
+                        break;
+                        case 5: if(gameBoard[2][2] == signP || gameBoard[2][2] == signC)
+                                {
+                                    System.out.println("Try Again!");
+                                    flgP = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[2][2] = signP;
+                                }
+                        break;
+                        case 6: if(gameBoard[2][4] == signP || gameBoard[2][4] == signC)
+                                {
+                                    System.out.println("Try Again!");
+                                    flgP = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[2][4] = signP;
+                                }
+                        break;
+                        case 7: if(gameBoard[4][0] == signP || gameBoard[4][0] == signC)
+                               {
+                                   System.out.println("Try Again!");
+                                   flgP = 0;
+                                   continue;
+                               }
+                               else
+                               {
+                                   gameBoard[4][0] = signP;
+                               }
+                        break;
+                        case 8: if(gameBoard[4][2] == signP || gameBoard[4][2] == signC)
+                                {
+                                    System.out.println("Try Again!");
+                                    flgP = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[4][2] = signP;
+                                }
+                        break;
+                        case 9: if(gameBoard[4][4] == signP || gameBoard[4][4] == signC)
+                                {
+                                    System.out.println("Try Again!");
+                                    flgP = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[4][4] = signP;
+                                }
+                        break;
+                        default: System.out.println("Try Again!");
+                                 flgP = 0;
+                        continue;
+                    }
+                    flgC = 0;
                 }
             }
-        }
-    }
-
-    // Generate Moves Automatically for Bot 
-    public void getBotMove()
-    {
-        int min = 1, max = 9;
-        
-        botMove = Integer.toString((int)Math.floor(Math.random() * (max - min + 1) + min));
-
-        // This code will check whether or not the position is empty or not
-        int i, j;
-
-        for(i = 0; i < gameBoard.length; i++)
-        {
-            for(j = 0; j < gameBoard.length; j++)
-            {
-                if(botMove.equals(gameBoard[i][j]) && gameBoard[i][j].equals(userSign) || gameBoard[i][j].equals(botSign))
-                {
-                    getBotMove();
-                }
-                else
-                {
-                    System.out.println("Bot's Move: \n" + botMove);
-                    i = 7;  // This code will terminate the outer loop
-                    break;
-                }
-            }
-        }
-    }
-
-    // Sets Move and Places move only if there is no other sign sitting
-    public void setMove(String pos, String sign)
-    {
-        int i, j;
-
-        for(i = 0; i < gameBoard.length; i++)
-        {
-            for(j = 0; j < gameBoard.length; j++)
-            {
-                if(pos.equals(gameBoard[i][j]))
-                {
-                    gameBoard[i][j] = sign;
-                }
-            }
-        }
-    }
-
-    // Check for winner
-    /**
-    *   Winning Conditions are common for both computer and player
-    *   The conditions are:
-    *       > 1, 5, 9
-    *       > 3, 5, 7
-    *       
-    *       > 1, 2, 3
-    *       > 4, 5, 6
-    *       > 7, 8, 9
-    *       
-    *       > 1, 4, 7
-    *       > 2, 5, 8
-    *       > 3, 6, 9
-    */
-    public void checkWinner(String sign)
-    {
-        if(sign.equals(userSign))
-        {
+            /**
+            *   Winning Conditions are common for both computer and player
+            *   The conditions are:
+            *       > 1, 5, 9
+            *       > 3, 5, 7
+            *       
+            *       > 1, 2, 3
+            *       > 4, 5, 6
+            *       > 7, 8, 9
+            *       
+            *       > 1, 4, 7
+            *       > 2, 5, 8
+            *       > 3, 6, 9
+            */
             //   1, 5, 9
-            if(gameBoard[0][0].equals(userSign) && gameBoard[2][2].equals(userSign) && gameBoard[4][4].equals(userSign))
+            if(gameBoard[0][0] == signP && gameBoard[2][2] == signP && gameBoard[4][4] == signP)
             {
-                System.out.println("User Won!");
-                System.exit(0);
+                printGameboard(gameBoard);
+                System.out.println("You Won!");
+                break;
             }
             //   3, 5, 7
-            if(gameBoard[0][4].equals(userSign) && gameBoard[2][2].equals(userSign) && gameBoard[4][0].equals(userSign))
+            if(gameBoard[0][4] == signP && gameBoard[2][2] == signP && gameBoard[4][0] == signP)
             {
-                System.out.println("User Won!");
-                System.exit(0);
+                printGameboard(gameBoard);
+                System.out.println("You Won!");
+                break;
             }
             //   1, 2, 3
-            if(gameBoard[0][0].equals(userSign) && gameBoard[0][2].equals(userSign) && gameBoard[0][4].equals(userSign))
+            if(gameBoard[0][0] == signP && gameBoard[0][2] == signP && gameBoard[0][4] == signP)
             {
-                System.out.println("User Won!");
-                System.exit(0);
+                printGameboard(gameBoard);
+                System.out.println("You Won!");
+                break;
             }
             //   4, 5, 6
-            if(gameBoard[2][0].equals(userSign) && gameBoard[2][2].equals(userSign) && gameBoard[2][4].equals(userSign))
+            if(gameBoard[2][0] == signP && gameBoard[2][2] == signP && gameBoard[2][4] == signP)
             {
-                System.out.println("User Won!");
-                System.exit(0);
+                printGameboard(gameBoard);
+                System.out.println("You Won!");
+                break;
             }
             //   7, 8, 9
-            if(gameBoard[4][0].equals(userSign) && gameBoard[4][2].equals(userSign) && gameBoard[4][4].equals(userSign))
+            if(gameBoard[4][0] == signP && gameBoard[4][2] == signP && gameBoard[4][4] == signP)
             {
-                System.out.println("User Won!");
-                System.exit(0);
+                printGameboard(gameBoard);
+                System.out.println("You Won!");
+                break;
             }
             //   1, 4, 7
-            if(gameBoard[0][0].equals(userSign) && gameBoard[2][0].equals(userSign) && gameBoard[4][0].equals(userSign))
+            if(gameBoard[0][0] == signP && gameBoard[2][0] == signP && gameBoard[4][0] == signP)
             {
-                System.out.println("User Won!");
-                System.exit(0);
+                printGameboard(gameBoard);
+                System.out.println("You Won!");
+                break;
             }
             //   2, 5, 8
-            if(gameBoard[0][2].equals(userSign) && gameBoard[2][2].equals(userSign) && gameBoard[4][2].equals(userSign))
+            if(gameBoard[0][2] == signP && gameBoard[2][2] == signP && gameBoard[4][2] == signP)
             {
-                System.out.println("User Won!");
-                System.exit(0);
+                printGameboard(gameBoard);
+                System.out.println("You Won!");
+                break;
             }
             //   3, 6, 9
-            if(gameBoard[0][4].equals(userSign) && gameBoard[2][4].equals(userSign) && gameBoard[4][4].equals(userSign))
+            if(gameBoard[0][4] == signP && gameBoard[2][4] == signP && gameBoard[4][4] == signP)
             {
-                System.out.println("User Won!");
-                System.exit(0);
+                printGameboard(gameBoard);
+                System.out.println("You Won!");
+                break;
             }     
-        }
-        if(sign.equals(botSign))
-        {
-            //   1, 5, 9
-            if(gameBoard[0][0].equals(botSign) && gameBoard[2][2].equals(botSign) && gameBoard[4][4].equals(botSign))
+            
+            // System.out.println("Computer's Turn!");
+            System.out.println("Computer's Turn!");
+            while(flgC != 1)
             {
-                System.out.println("Bot Won!");
-                System.exit(0);
+                //   Computer's turn
+                if(flgC != 1)
+                {                  
+                   int min = 1;
+                   int max = 9;
+                   
+                   choice = (int)Math.floor(Math.random() * (max - min + 1) + min);
+                   
+                   flgC = 1;
+                   switch(choice)
+                   {
+                       case 1: if(gameBoard[0][0] == signP || gameBoard[0][0] == signC)
+                                {    
+                                    //System.out.println("Try Again!");
+                                    flgC = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[0][0] = signC;
+                                    System.out.println(choice);
+                                }
+                        break;
+                        case 2: if(gameBoard[0][2] == signP || gameBoard[0][2] == signC)
+                                {
+                                    //System.out.println("Try Again!");
+                                    flgC = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[0][2] = signC;
+                                    System.out.println(choice);
+                                }
+                        break;
+                        case 3: if(gameBoard[0][4] == signP || gameBoard[0][4] == signC)
+                                    {
+                                        //System.out.println("Try Again!");
+                                        flgC = 0;
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        gameBoard[0][4] = signC;
+                                        System.out.println(choice);
+                                    }
+                        break;
+                        case 4: if(gameBoard[2][0] == signP || gameBoard[2][0] == signC)
+                                {
+                                    //System.out.println("Try Again!");
+                                    flgC = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[2][0] = signC;
+                                    System.out.println(choice);
+                                }
+                        break;
+                        case 5: if(gameBoard[2][2] == signP || gameBoard[2][2] == signC)
+                                {
+                                    //System.out.println("Try Again!");
+                                    flgC = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[2][2] = signC;
+                                    System.out.println(choice);
+                                }
+                        break;
+                        case 6: if(gameBoard[2][4] == signP || gameBoard[2][4] == signC)
+                                {
+                                    //System.out.println("Try Again!");
+                                    flgC = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[2][4] = signC;
+                                    System.out.println(choice);
+                                }
+                        break;
+                        case 7: if(gameBoard[4][0] == signP || gameBoard[4][0] == signC)
+                               {
+                                   //System.out.println("Try Again!");
+                                   flgC = 0;
+                                   continue;
+                               }
+                               else
+                               {
+                                   gameBoard[4][0] = signC;
+                                   System.out.println(choice);
+                               }
+                        break;
+                        case 8: if(gameBoard[4][2] == signP || gameBoard[4][2] == signC)
+                                {
+                                    //System.out.println("Try Again!");
+                                    flgC = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[4][2] = signC;
+                                    System.out.println(choice);
+                                }
+                        break;
+                        case 9: if(gameBoard[4][4] == signP || gameBoard[4][4] == signC)
+                                {
+                                    //System.out.println("Try Again!");
+                                    flgC = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    gameBoard[4][4] = signC;
+                                    System.out.println(choice);
+                                }
+                        break;
+                        default: flgC = 0;
+                        continue;
+                   }
+                   flgP = 0;
+                }    
+                
+                for(i = 0; i < 5; i++)
+                {
+                    for(j = 0; j < 5; j++)
+                    {
+                        System.out.print(gameBoard[i][j]);
+                    }
+                    System.out.println();
+                }  
+            }
+            //   1, 5, 9
+            if(gameBoard[0][0] == signC && gameBoard[2][2] == signC && gameBoard[4][4] == signC)
+            {
+                System.out.println("Computer Wins!");
+                break;
             }
             //   3, 5, 7
-            if(gameBoard[0][4].equals(botSign) && gameBoard[2][2].equals(botSign) && gameBoard[4][0].equals(botSign))
+            if(gameBoard[0][4] == signC && gameBoard[2][2] == signC && gameBoard[4][0] == signC)
             {
-                System.out.println("Bot Won!");
-                System.exit(0);
+                System.out.println("Computer Wins!");
+                break;
             }
             //   1, 2, 3
-            if(gameBoard[0][0].equals(botSign) && gameBoard[0][2].equals(botSign) && gameBoard[0][4].equals(botSign))
+            if(gameBoard[0][0] == signC && gameBoard[0][2] == signC && gameBoard[0][4] == signC)
             {
-                System.out.println("Bot Won!");
-                System.exit(0);
+                System.out.println("Computer Wins!");
+                break;
             }
             //   4, 5, 6
-            if(gameBoard[2][0].equals(botSign) && gameBoard[2][2].equals(botSign) && gameBoard[2][4].equals(botSign))
+            if(gameBoard[2][0] == signC && gameBoard[2][2] == signC && gameBoard[2][4] == signC)
             {
-                System.out.println("Bot Won!");
-                System.exit(0);
+                System.out.println("Computer Wins!");
+                break;
             }
             //   7, 8, 9
-            if(gameBoard[4][0].equals(botSign) && gameBoard[4][2].equals(botSign) && gameBoard[4][4].equals(botSign))
+            if(gameBoard[4][0] == signC && gameBoard[4][2] == signC && gameBoard[4][4] == signC)
             {
-                System.out.println("Bot Won!");
-                System.exit(0);
+                System.out.println("Computer Wins!");
+                break;
             }
             //   1, 4, 7
-            if(gameBoard[0][0].equals(botSign) && gameBoard[2][0].equals(botSign) && gameBoard[4][0].equals(botSign))
+            if(gameBoard[0][0] == signC && gameBoard[2][0] == signC && gameBoard[4][0] == signC)
             {
-                System.out.println("Bot Won!");
-                System.exit(0);
+                System.out.println("Computer Wins!");
+                break;
             }
             //   2, 5, 8
-            if(gameBoard[0][2].equals(botSign) && gameBoard[2][2].equals(botSign) && gameBoard[4][2].equals(botSign))
+            if(gameBoard[0][2] == signC && gameBoard[2][2] == signC && gameBoard[4][2] == signC)
             {
-                System.out.println("Bot Won!");
-                System.exit(0);
+                System.out.println("Computer Wins!");
+                break;
             }
             //   3, 6, 9
-            if(gameBoard[0][4].equals(botSign) && gameBoard[2][4].equals(botSign) && gameBoard[4][4].equals(botSign))
+            if(gameBoard[0][4] == signC && gameBoard[2][4] == signC && gameBoard[4][4] == signC)
             {
-                System.out.println("Bot Won!");
-                System.exit(0);
-            }
+                System.out.println("Computer Wins!");
+                break;
+            }          
         }
-    }
-    public void play()
-    {
-        switch(userSign)
-        {
-            case "X":   while(win != true)
-                        {
-                            getUserMove();
-                            setMove(userMove, userSign);
-                            printGameboard();
-                            checkWinner(userSign);
-                    
-                            getBotMove();
-                            setMove(botMove, botSign);
-                            printGameboard();     
-                            checkWinner(botSign);   
-                        }
-            break;
-            case "O":   while(win != true)
-                        {
-                            getBotMove();
-                            setMove(botMove, botSign);
-                            printGameboard();
-                            checkWinner(botSign);
-                            
-                            getUserMove();
-                            setMove(userMove, userSign);
-                            printGameboard();
-                            checkWinner(userSign);
-                        }
-            break;
-        }
-    }
-
-    public static void main(String[] args) 
-    {
-        ticktaktoe game = new ticktaktoe();
-        game.printGameboard();
-        game.setPreference();
-        game.play();
     }
 }
